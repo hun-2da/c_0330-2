@@ -7,16 +7,16 @@ typedef struct {
 	int top;
 	int capacity;
 }element;
-element *e;
+//element *e;
 
-int is_empty() {
+int is_empty(element *e) {
 	return (e->top == -1);
 }
-int is_full() {
+int is_full(element* e) {
 	return (e->top == (e-> capacity - 1));
 }
-void push(int item) {
-	if (is_full()) {
+void push(element* e,int item) {
+	if (is_full(e)) {
 		fprintf(stderr, "stack full\n");
 		e->capacity = e->capacity* 2;
 		e->stack_m = realloc(e->stack_m, e->capacity * sizeof(int));
@@ -24,8 +24,8 @@ void push(int item) {
 	}
 	else e->stack_m[++e->top] = item;
 }
-int pop() {
-	if (is_empty()) {
+int pop(element* e) {
+	if (is_empty(e)) {
 		fprintf(stderr, "stack empty\n");
 		return -1;
 	}
@@ -38,7 +38,7 @@ int main() {
 	m->stack_m = malloc(m->capacity*sizeof(int));
 	
 	
-	e = m;
+	//e = m;
 
 	srand(time(NULL));
 	printf("----Using array----\n");
@@ -46,11 +46,11 @@ int main() {
 
 		int rand_num = rand() % 100 + 1;
 		if (rand_num % 2 == 1) {
-			printf("[%3d]pop %d\n", i, pop());
+			printf("[%3d]pop %d\n", i, pop(m));
 
 		}else {
 			printf("[%3d]push %d\n", i, rand_num);
-			push(rand_num);
+			push(m,rand_num);
 
 		}
 	}
